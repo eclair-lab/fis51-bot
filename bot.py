@@ -11,8 +11,8 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton
 
 # ТВОИ ДАННЫЕ (уже вставлены!)
-BOT_TOKEN = os.getenv("8747315107:AAGUkCUbbQvZ24uxKPWSmceQOF8Plf67s-g")
-YOUR_CHAT_ID = int(os.getenv(901984475))
+BOTTOKEN = os.getenv("8747315107:AAGUkCUbbQvZ24uxKPWSmceQOF8Plf67s-g")
+YOURCHATID = int(os.getenv(901984475))
 
 # Города Мурманской области
 CITIES = [
@@ -204,8 +204,7 @@ async def about_company(message: Message):
 
 
 async def main():
-    print("🤖 Бот ФИС51 запущен! Токен и ID настроены.")
-    print(f"Заявки будут приходить на ID: {YOUR_CHAT_ID}")
+    print("🤖 Бот ФИС51 запущен на Render!")
     await dp.start_polling(bot)
 
 
