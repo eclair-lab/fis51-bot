@@ -10,17 +10,12 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton
 
-# ТВОИ ДАННЫЕ (уже вставлены!)
 BOTTOKEN = os.getenv("8747315107:AAGUkCUbbQvZ24uxKPWSmceQOF8Plf67s-g")
 YOURCHATID = int(os.getenv(901984475))
-
-# Города Мурманской области
 CITIES = [
     "Мурманск", "Апатиты", "Североморск", "Мончегорск", "Оленегорск",
     "Кандалакша", "Кировск", "Полярные Зори", "Заозёрск", "Кола"
 ]
-
-# Услуги
 SERVICES = ["Двери", "Окна", "Потолок", "Утепление балконов", "Жалюзи"]
 
 logging.basicConfig(level=logging.INFO)
@@ -46,7 +41,7 @@ async def start_handler(message: Message, state: FSMContext):
     markup = ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True)
     await message.answer(
         "👋 Привет! Добро пожаловать в ФИС51! 🏠\n\n"
-        "Мы предоставляем услуги:\n"
+        "Мы предлагаем следующий перечень услуг:\n"
         "• Двери и окна\n"
         "• Потолки и жалюзи\n"
         "• Утепление балконов\n\n"
@@ -68,7 +63,7 @@ async def process_city(message: Message, state: FSMContext):
     markup = ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True, one_time_keyboard=True)
     await message.answer(
         "🏙 Из какого города Мурманской области ты?\n"
-        "Выбери или напиши свой:",
+        "Выбери свой:",
         reply_markup=markup
     )
     await state.set_state(Form.city)
@@ -118,7 +113,7 @@ async def process_service(message: Message, state: FSMContext):
     kb = [[KeyboardButton(text=srv)] for srv in SERVICES]
     markup = ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True, one_time_keyboard=True)
     await message.answer(
-        "🔨 Какая услуга тебе нужна? Выбери:",
+        "🔨 Какая услуга Вам нужна? Выбери:",
         reply_markup=markup
     )
     await state.set_state(Form.service)
@@ -148,8 +143,7 @@ async def process_date_select(message: Message, state: FSMContext):
     )
 
     await message.answer(
-        "📅 Выбери удобную дату для консультации:\n"
-        "(сегодня + неделя вперед)",
+        "📅 Выберите удобную дату для консультации:\n",
         reply_markup=markup
     )
     await state.set_state(Form.date_consult)
@@ -173,7 +167,7 @@ async def send_application(message: Message, state: FSMContext):
         await bot.send_message(YOUR_CHAT_ID, app_text)
         await message.answer(
             "✅ Заявка отправлена!\n"
-            "Менеджер свяжется в течение часа! 😊\n\n"
+            "Менеджер свяжется с Вами в ближайшее время! 😊\n\n"
             "Спасибо за обращение в ФИС51! 🏠",
             reply_markup=ReplyKeyboardMarkup(
                 keyboard=[[KeyboardButton(text="🚀 Новая заявка")]],
@@ -195,8 +189,8 @@ async def new_application(message: Message, state: FSMContext):
 @dp.message(F.text == "ℹ️ О компании")
 async def about_company(message: Message):
     await message.answer(
-        "🏠 ФИС51 — надежные окна, двери и отделка в Мурманской области!\n\n"
-        "✅ 10+ лет опыта\n"
+        "🏠 ФИС51 — Лучшие двери, окна и потолки в Мурманской области!\n\n"
+        "✅ Более 10 лет опыта\n"
         "✅ Гарантия на работы\n"
         "✅ Бесплатный замер\n\n"
         "🚀 Начать заявку?"
